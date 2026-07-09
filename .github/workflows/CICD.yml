@@ -1,6 +1,6 @@
 name: CI/CD for dockerized Flask App
 
-on: ## Events that trigger the workflow
+on:
   push:
     branches:
       - main
@@ -48,13 +48,13 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push Docker image
-        id: build
+        id: docker-build
         uses: docker/build-push-action@v5
         with:
-          context: ./Dockerimage
-          file: ./Dockerimage/Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/flasktest-app:latest
 
       - name: Image digest
-        run: echo "Image digest: ${{ steps.build.outputs.digest }}"
+        run: echo "${{ steps.docker-build.outputs.digest }}"
