@@ -51,8 +51,8 @@ jobs:
         id: docker-build
         uses: docker/build-push-action@v5
         with:
-          context: Dockerimage
-          file: Dockerimage/Dockerfile
+          context: .
+          file: DockerFile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/flasktest-app:latest
 
